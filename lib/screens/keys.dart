@@ -1,16 +1,38 @@
+import 'package:bloc_tutorijal/bloc/calc_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Keys extends StatelessWidget {
+class Keys extends StatefulWidget {
   const Keys({Key? key}) : super(key: key);
+
+  @override
+  State<Keys> createState() => _KeysState();
+}
+
+class _KeysState extends State<Keys> {
+  final CalcBloc bloc = CalcBloc();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          color: Colors.green,
-          width: 300,
-          height: 60,
+        BlocBuilder<CalcBloc, CalcState>(
+          bloc: bloc,
+          builder: (context, state) {
+            if (state is CalcInitial) {
+              return Text('pocetni state');
+            } else if (state is ShowNumberState) {
+              return Text(
+                state.number.toString(),
+              );
+            } else {
+              return Container(
+                width: 100,
+                height: 100,
+                child: Text('$state'),
+              );
+            }
+          },
         ),
         Row(
           children: [
@@ -20,7 +42,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 7),
+                  );
+                },
                 child: const Text('7'),
               ),
             ),
@@ -30,7 +56,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 8),
+                  );
+                },
                 child: const Text('8'),
               ),
             ),
@@ -40,7 +70,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 9),
+                  );
+                },
                 child: const Text('9'),
               ),
             ),
@@ -49,7 +83,11 @@ class Keys extends StatelessWidget {
               child: TextButton(
                 style: TextButton.styleFrom(
                     primary: Colors.amber, backgroundColor: Colors.red),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    ClearEvent(),
+                  );
+                },
                 child: const Text('C'),
               ),
             ),
@@ -63,7 +101,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 4),
+                  );
+                },
                 child: const Text('4'),
               ),
             ),
@@ -73,7 +115,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 5),
+                  );
+                },
                 child: const Text('5'),
               ),
             ),
@@ -83,7 +129,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 6),
+                  );
+                },
                 child: const Text('6'),
               ),
             ),
@@ -107,7 +157,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 1),
+                  );
+                },
                 child: const Text('1'),
               ),
             ),
@@ -117,7 +171,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 2),
+                  );
+                },
                 child: const Text('2'),
               ),
             ),
@@ -127,7 +185,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 3),
+                  );
+                },
                 child: const Text('3'),
               ),
             ),
@@ -151,7 +213,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddNumberEvent(number: 0),
+                  );
+                },
                 child: const Text('0'),
               ),
             ),
@@ -161,7 +227,11 @@ class Keys extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Colors.amber,
                     backgroundColor: Colors.deepPurpleAccent),
-                onPressed: () {},
+                onPressed: () {
+                  bloc.add(
+                    AddDotEvent(),
+                  );
+                },
                 child: const Text('.'),
               ),
             ),

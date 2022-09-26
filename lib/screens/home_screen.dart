@@ -1,4 +1,6 @@
+import 'package:bloc_tutorijal/bloc/calc_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'keys.dart';
 
@@ -12,8 +14,11 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Kalkulator'),
       ),
       body: Column(
-        children: const [
-          Keys(),
+        children: [
+          BlocProvider(
+            create: (context) => CalcBloc(),
+            child: Keys(),
+          ),
         ],
       ),
     );
